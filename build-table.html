@@ -1,105 +1,111 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang='de'>
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset='UTF-8'>
     <title>Build a table</title>
-    <link rel="stylesheet" href="mystyle.css">
+    <link rel='stylesheet' href='mystyle.css'>
 </head>
 
 <body>
 
-    <div id="container500" class="container">
-        <div class="box1">500€</div>
-        <input class='box2' type="number" placeholder="0" min='0' id='box1_in'>
-        <div class='box3' id='box1_out'>0</div>
+    <div class='box4'>
+        <div class='container'></div>
+        <input type='text'>
+        <div class='box_euro_sum'></div>
     </div>
-    <div id="container200" class="container">
-        <div class="box1">200€</div>
-        <input class='box2' type='number' placeholder="0" min='0' id='box2_in'>
-        <div class='box3' id='box2_out'>0</div>
+    <div class='box_right' id='box_right'>
+        <div id='container500' class='container'>
+            <div class='box_euro_unit'>500€</div>
+            <input class='input_unit' type='number' placeholder='0' min='0' id='box1_in'>
+            <div class='box_euro_sum' id='box1_out'>0</div>
+        </div>
+        <div id='container200' class='container'>
+            <div class='box_euro_unit'>200€</div>
+            <input class='input_unit' type='number' placeholder='0' min='0' id='box2_in'>
+            <div class='box_euro_sum' id='box2_out'>0</div>
+        </div>
+        <div id='container100' class='container'>
+            <div class='box_euro_unit'>100€</div>
+            <input class='input_unit' type='number' placeholder='0' min='0' id='box3_in'>
+            <div class='box_euro_sum' id='box3_out'>0</div>
+        </div>
+        <div id='container50' class='container'>
+            <div class='box_euro_unit'>50€</div>
+            <input class='input_unit' type='number' placeholder='0' min='0' id='box4_in'>
+            <div class='box_euro_sum' id='box4_out'>0</div>
+        </div>
+        <div id='container20' class='container'>
+            <div class='box_euro_unit'>20€</div>
+            <input class='input_unit' type='number' placeholder='0' min='0' id='box5_in'>
+            <div class='box_euro_sum' id='box5_out'>0</div>
+        </div>
+        <div id='container10' class='container'>
+            <div class='box_euro_unit'>10€</div>
+            <input class='input_unit' type='number' placeholder='0' min='0' id='box6_in'>
+            <div class='box_euro_sum' id='box6_out'>0</div>
+        </div>
+        <div id='container5' class='container'>
+            <div class='box_euro_unit'>5€</div>
+            <input class='input_unit' type='number' placeholder='0' min='0' id='box7_in'>
+            <div class='box_euro_sum' id='box7_out'>0</div>
+        </div>
+        <div id='container2' class='container'>
+            <div class='box_euro_unit'>2€</div>
+            <input class='input_unit' type='number' placeholder='0' min='0' id='box8_in'>
+            <div class='box_euro_sum' id='box8_out'>0</div>
+        </div>
+        <div id='container1' class='container'>
+            <div class='box_euro_unit'>1€</div>
+            <input class='input_unit' type='number' placeholder='0' min='0' id='box9_in'>
+            <div class='box_euro_sum' id='box9_out'>0</div>
+        </div>
+        <div id='container050' class='container'>
+            <div class='box_euro_unit'>0,50€</div>
+            <input class='input_unit' type='number' placeholder='0' min='0' id='box10_in'>
+            <div class='box_euro_sum' id='box10_out'>0</div>
+        </div>
+        <div id='container020' class='container'>
+            <div class='box_euro_unit'>0,20€</div>
+            <input class='input_unit' type='number' placeholder='0' min='0' id='box11_in'>
+            <div class='box_euro_sum' id='box11_out'>0</div>
+        </div>
+        <div id='container010' class='container'>
+            <div class='box_euro_unit'>0,10€</div>
+            <input class='input_unit' type='number' placeholder='0' min='0' id='box12_in'>
+            <div class='box_euro_sum' id='box12_out'>0</div>
+        </div>
+        <div id='container005' class='container'>
+            <div class='box_euro_unit'>0,05€</div>
+            <input class='input_unit' type='number' placeholder='0' min='0' id='box13_in'>
+            <div class='box_euro_sum' id='box13_out'>0</div>
+        </div>
+        <div id='container002' class='container'>
+            <div class='box_euro_unit'>0,02€</div>
+            <input class='input_unit' type='number' placeholder='0' min='0' id='box14_in'>
+            <div class='box_euro_sum' id='box14_out'>0</div>
+        </div>
+        <div id='container001' class='container'>
+            <div class='box_euro_unit'>0,01€</div>
+            <input class='input_unit' type='number' placeholder='0' min='0' id='box15_in'>
+            <div class='box_euro_sum' id='box15_out'>0</div>
+        </div>
+        <div id='container001' class='sum_container'>
+            <div class='box_euro_unit'>Summe:</div>
+            <input class='input_unit' type='number' placeholder='0' min='0' id='box2_in' style='visibility: hidden'>
+            <div class='box_euro_sum' id='box16_out'>0</div>
+        </div>
     </div>
-    <div id="container100" class="container">
-        <div class="box1">100€</div>
-        <input class='box2' type='number' placeholder="0" min='0' id='box3_in'>
-        <div class='box3' id='box3_out'>0</div>
-    </div>
-    <div id="container50" class="container">
-        <div class="box1">50€</div>
-        <input class='box2' type='number' placeholder="0" min='0' id='box4_in'>
-        <div class='box3' id='box4_out'>0</div>
-    </div>
-    <div id="container20" class="container">
-        <div class="box1">20€</div>
-        <input class='box2' type='number' placeholder="0" min='0' id='box5_in'>
-        <div class='box3' id='box5_out'>0</div>
-    </div>
-    <div id="container10" class="container">
-        <div class="box1">10€</div>
-        <input class='box2' type='number' placeholder="0" min='0' id='box6_in'>
-        <div class='box3' id='box6_out'>0</div>
-    </div>
-    <div id="container5" class="container">
-        <div class="box1">5€</div>
-        <input class='box2' type='number' placeholder="0" min='0' id='box7_in'>
-        <div class='box3' id='box7_out'>0</div>
-    </div>
-    <div id="container2" class="container">
-        <div class="box1">2€</div>
-        <input class='box2' type='number' placeholder="0" min='0' id='box8_in'>
-        <div class='box3' id='box8_out'>0</div>
-    </div>
-    <div id="container1" class="container">
-        <div class="box1">1€</div>
-        <input class='box2' type='number' placeholder="0" min='0' id='box9_in'>
-        <div class='box3' id='box9_out'>0</div>
-    </div>
-    <div id="container050" class="container">
-        <div class="box1">0,50€</div>
-        <input class='box2' type='number' placeholder="0" min='0' id='box10_in'>
-        <div class='box3' id='box10_out'>0</div>
-    </div>
-    <div id="container020" class="container">
-        <div class="box1">0,20€</div>
-        <input class='box2' type='number' placeholder="0" min='0' id='box11_in'>
-        <div class='box3' id='box11_out'>0</div>
-    </div>
-    <div id="container010" class="container">
-        <div class="box1">0,10€</div>
-        <input class='box2' type='number' placeholder="0" min='0' id='box12_in'>
-        <div class='box3' id='box12_out'>0</div>
-    </div>
-    <div id="container005" class="container">
-        <div class="box1">0,05€</div>
-        <input class='box2' type='number' placeholder="0" min='0' id='box13_in'>
-        <div class='box3' id='box13_out'>0</div>
-    </div>
-    <div id="container002" class="container">
-        <div class="box1">0,02€</div>
-        <input class='box2' type='number' placeholder="0" min='0' id='box14_in'>
-        <div class='box3' id='box14_out'>0</div>
-    </div>
-    <div id="container001" class="container">
-        <div class="box1">0,01€</div>
-        <input class='box2' type='number' placeholder="0" min='0' id='box15_in'>
-        <div class='box3' id='box15_out'>0</div>
-    </div>
-    <div id="container001" class="sum_container">
-        <div class="box1" style="visibility: hidden">0,01€</div>
-        <input class='box2' type='number' placeholder="0" min='0' id='box2_in' style="visibility: hidden">
-        <div class='box3' id='box16_out'>0</div>
-    </div>
-
 
 </body>
 <script>
-    //
-    var inputs = document.querySelectorAll("input")
-    var box3_array = document.querySelectorAll(".box3")
+    // get right div box element
+    var box_right = document.getElementById('box_right');
+    var positions_euro_sum = box_right.querySelectorAll('.box_euro_sum')
 
-    function forward_input_onkeyup(strInputBox, strOutputBox, monetary_factor) {
+    function calc_sum_on_units(strInputBox, strOutputBox, monetary_factor) {
         var inputBox = document.getElementById(strInputBox);
-        var sumBox = document.getElementById("box16_out");
+        var sumBox = document.getElementById('box16_out');
 
         // function
         inputBox.onkeyup = function() {
@@ -109,7 +115,7 @@
             // sum up all partial sum
             var sum = 0;
             for (let i = 0; i < 15; i++) {
-                sum += parseFloat(box3_array[i].innerHTML);
+                sum += parseFloat(positions_euro_sum[i].innerHTML);
             }
 
             // write final sum to box16_out
@@ -117,21 +123,21 @@
         }
     }
 
-    forward_input_onkeyup("box1_in", "box1_out", 500.0);
-    forward_input_onkeyup("box2_in", "box2_out", 200.0);
-    forward_input_onkeyup("box3_in", "box3_out", 100.0);
-    forward_input_onkeyup("box4_in", "box4_out", 50.0);
-    forward_input_onkeyup("box5_in", "box5_out", 20.0);
-    forward_input_onkeyup("box6_in", "box6_out", 10.0);
-    forward_input_onkeyup("box7_in", "box7_out", 5.0);
-    forward_input_onkeyup("box8_in", "box8_out", 2.0);
-    forward_input_onkeyup("box9_in", "box9_out", 1.0);
-    forward_input_onkeyup("box10_in", "box10_out", 0.5);
-    forward_input_onkeyup("box11_in", "box11_out", 0.2);
-    forward_input_onkeyup("box12_in", "box12_out", 0.1);
-    forward_input_onkeyup("box13_in", "box13_out", 0.05);
-    forward_input_onkeyup("box14_in", "box14_out", 0.02);
-    forward_input_onkeyup("box15_in", "box15_out", 0.01);
+    calc_sum_on_units('box1_in', 'box1_out', 500.0);
+    calc_sum_on_units('box2_in', 'box2_out', 200.0);
+    calc_sum_on_units('box3_in', 'box3_out', 100.0);
+    calc_sum_on_units('box4_in', 'box4_out', 50.0);
+    calc_sum_on_units('box5_in', 'box5_out', 20.0);
+    calc_sum_on_units('box6_in', 'box6_out', 10.0);
+    calc_sum_on_units('box7_in', 'box7_out', 5.0);
+    calc_sum_on_units('box8_in', 'box8_out', 2.0);
+    calc_sum_on_units('box9_in', 'box9_out', 1.0);
+    calc_sum_on_units('box10_in', 'box10_out', 0.5);
+    calc_sum_on_units('box11_in', 'box11_out', 0.2);
+    calc_sum_on_units('box12_in', 'box12_out', 0.1);
+    calc_sum_on_units('box13_in', 'box13_out', 0.05);
+    calc_sum_on_units('box14_in', 'box14_out', 0.02);
+    calc_sum_on_units('box15_in', 'box15_out', 0.01);
 </script>
 
 </html>
