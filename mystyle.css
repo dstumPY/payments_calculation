@@ -1,5 +1,9 @@
-.box_euro_unit,
-.box_euro_sum {
+.box_euro_unit_left,
+.box_euro_unit_middle,
+.box_euro_unit_right,
+.box_euro_sum_left,
+.box_euro_sum_middle,
+.box_euro_sum_right {
     float: left;
     width: 15%;
     margin-right: 1.33333%;
@@ -31,6 +35,8 @@ body {
     border: thin dotted #337599;
 }
 
+.box_left,
+.box_middle,
 .box_right {
     width: 80%;
     display: block;
