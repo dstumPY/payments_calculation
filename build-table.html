@@ -86,9 +86,30 @@
             <div class='box_euro_sum_left' id='out001_left'>0</div>
         </div>
         <div id='sum_container' class='sum_container'>
-            <div class='box_euro_unit_left'>Summe:</div>
-            <input class='input_unit' type='number' placeholder='0' min='0' id=input500_left style='visibility: hidden'>
+            <div class='box_euro_unit_left'>Summe aktuell:</div>
+            <input class='input_unit' type='number' placeholder='0' min='0' id=input_sum_actual_left>
             <div class='box_euro_sum_left' id='complete_sum_left'>0</div>
+        </div>
+    </div>
+
+    <div class='box_button' id='box_button'>
+        <div class='container' style='visibility:hidden'><input type="invisible" class='input_unit' style='visibility:hidden'></div>
+        <div class='container' style='visibility:hidden'><input type="invisible" class='input_unit' style='visibility:hidden'></div>
+        <div class='container' style='visibility:hidden'><input type="invisible" class='input_unit' style='visibility:hidden'></div>
+        <div class='container' style='visibility:hidden'><input type="invisible" class='input_unit' style='visibility:hidden'></div>
+        <div class='container' style='visibility:hidden'><input type="invisible" class='input_unit' style='visibility:hidden'></div>
+        <div class='container' style='visibility:hidden'><input type="invisible" class='input_unit' style='visibility:hidden'></div>
+        <div class='container' style='visibility:hidden'><input type="invisible" class='input_unit' style='visibility:hidden'></div>
+        <div class='container' style='visibility:hidden'><input type="invisible" class='input_unit' style='visibility:hidden'></div>
+        <div class='container' style='visibility:hidden'><input type="invisible" class='input_unit' style='visibility:hidden'></div>
+        <div class='container' style='visibility:hidden'><input type="invisible" class='input_unit' style='visibility:hidden'></div>
+        <div class='container' style='visibility:hidden'><input type="invisible" class='input_unit' style='visibility:hidden'></div>
+        <div class='container' style='visibility:hidden'><input type="invisible" class='input_unit' style='visibility:hidden'></div>
+        <div class='container' style='visibility:hidden'><input type="invisible" class='input_unit' style='visibility:hidden'></div>
+        <div class='container' style='visibility:hidden'><input type="invisible" class='input_unit' style='visibility:hidden'></div>
+        <div class='container' style='visibility:hidden'><input type="invisible" class='input_unit' style='visibility:hidden'></div>
+        <div class='sum_container'>
+            <button type='button' id='button_calculation'>Klick mich!</button>
         </div>
     </div>
 
@@ -170,9 +191,9 @@
             <div class='box_euro_sum_middle' id='out001_middle'>0</div>
         </div>
         <div id='sum_container' class='sum_container'>
-            <div class='box_euro_unit_middle'>Summe:</div>
+            <div class='box_euro_unit_middle'>Summe Differenz:</div>
             <input class='input_unit' style='visibility: hidden'>
-            <div class='box_euro_sum_middle' id='out_middle'>0</div>
+            <div class='box_euro_sum_middle' id='complete_sum_middle'>0</div>
         </div>
 
     </div>
@@ -255,32 +276,42 @@
             <div class='box_euro_sum_right' id='out001_right'>0</div>
         </div>
         <div id='sum_container' class='sum_container'>
-            <div class='box_euro_unit_right'>Summe:</div>
+            <div class='box_euro_unit_right'>Summe Vortag:</div>
             <input class='input_unit' type='number' placeholder='0' min='0' id='input200_right' style='visibility: hidden'>
             <div class='box_euro_sum_right' id='complete_sum_right'>0</div>
         </div>
     </div>
-
-
 </body>
 <script>
-    // get right div box element
-
-    function calc_sum_on_units(outer_box, strInputBox, strOutputBox, monetary_factor) {
-        console.log(outer_box)
-        var outer_box_elt = document.getElementById(outer_box);
-        var positions_euro_sum = outer_box_elt.querySelectorAll('.box_euro_sum')
+    function multiply_money_with_number(strInputBox, strOutputBox, monetary_factor) {
         var inputBox = document.getElementById(strInputBox);
-        if (outer_box === 'box_right') {
-            var sumBox = document.getElementById('complete_sum_right');
-        } else if (outer_box === 'box_left') {
-            var sumBox = document.getElementById('complete_sum_left');
+
+        inputBox.onkeyup = function() {
+            // calculate sum only within the row
+            var number_payment = inputBox.value;
+            document.getElementById(strOutputBox).innerHTML = number_payment * monetary_factor;
         }
 
+    }
+
+
+    function calc_sum_on_units(outer_box, strInputBox, strOutputBox, monetary_factor) {
+        var outer_box_elt = document.getElementById(outer_box);
+        var inputBox = document.getElementById(strInputBox);
+
+        // select right or left div box (box_left resp. box_right)
+        if (outer_box === 'box_right') {
+            var sumBox = document.getElementById('complete_sum_right');
+            var positions_euro_sum = outer_box_elt.querySelectorAll('.box_euro_sum_right')
+        } else if (outer_box === 'box_left') {
+            var sumBox = document.getElementById('complete_sum_left');
+            var positions_euro_sum = outer_box_elt.querySelectorAll('.box_euro_sum_left')
+        }
 
 
         // function
         inputBox.onkeyup = function() {
+            // calculate sum onyl in the row
             var number_payment = inputBox.value;
             document.getElementById(strOutputBox).innerHTML = number_payment * monetary_factor;
 
@@ -295,6 +326,50 @@
         }
     }
 
+    function get_working_array(euro_units_array, sum_value) {
+        // init lowest index for euro_units array
+        let idx = 0;
+
+        // find smalles element in array which is greater than the sum_value
+        while (sum_value < euro_units_array[idx]) {
+            idx++;
+        }
+
+        // create working_array which lists all elements smaller than
+        // (including) the found one
+        working_array = []
+        for (i = idx; i < 15; i++) {
+            working_array.push(euro_units_array[i]);
+        }
+    }
+
+
+    function calculate_random_euro_units_from_difference() {
+        button_item = document.getElementById('button_calculation')
+
+        // init all possible euro payment sizes
+        const euro_units = [500, 200, 100, 50, 20, 10, 5, 2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01];
+
+        // read final sum box values (left and right)
+        out_sum_left = document.getElementById('complete_sum_left');
+        out_sum_right = document.getElementById('complete_sum_right');
+        out_sum_middle_item = document.getElementById('complete_sum_middle');
+
+        button_item.onclick = function() {
+            const euro_sum = out_sum_middle_item.innerHTML;
+
+            working_array = get_working_array(euro_units, euro_sum)
+
+            // get random int between 0 and euro_units.length
+            const random = Math.floor(Math.random() * euro_units.length)
+            console.log(random)
+            console.log(euro_units[random])
+            out_sum_middle_item.innerHTML = parseFloat(out_sum_left.innerHTML) - parseFloat(out_sum_right.innerHTML);
+
+        }
+    }
+
+    // calc row-wise sums
     calc_sum_on_units('box_right', 'input500_right', 'out500_right', 500.0);
     calc_sum_on_units('box_right', 'input200_right', 'out200_right', 200.0);
     calc_sum_on_units('box_right', 'input100_right', 'out100_right', 100.0);
@@ -311,6 +386,8 @@
     calc_sum_on_units('box_right', 'input002_right', 'out002_right', 0.02);
     calc_sum_on_units('box_right', 'input001_right', 'out001_right', 0.01);
 
+    multiply_money_with_number('input_sum_actual_left', 'complete_sum_left', 1)
+
     calc_sum_on_units('box_left', 'input500_left', 'out500_left', 500.0);
     calc_sum_on_units('box_left', 'input200_left', 'out200_left', 200.0);
     calc_sum_on_units('box_left', 'input100_left', 'out100_left', 100.0);
@@ -326,6 +403,8 @@
     calc_sum_on_units('box_left', 'input005_left', 'out005_left', 0.05);
     calc_sum_on_units('box_left', 'input002_left', 'out002_left', 0.02);
     calc_sum_on_units('box_left', 'input001_left', 'out001_left', 0.01);
+
+    calculate_random_euro_units_from_difference()
 </script>
 
 </html>
