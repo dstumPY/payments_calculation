@@ -285,11 +285,15 @@
 <script>
     function multiply_money_with_number(strInputBox, strOutputBox, monetary_factor) {
         var inputBox = document.getElementById(strInputBox);
+        var right_sum_box = document.getElementById('complete_sum_right');
+        var middle_sum_box = document.getElementById('complete_sum_middle');
 
         inputBox.onkeyup = function() {
             // calculate sum only within the row
             var number_payment = inputBox.value;
-            document.getElementById(strOutputBox).innerHTML = number_payment * monetary_factor;
+            var left_sum_box = document.getElementById(strOutputBox)
+            left_sum_box.innerHTML = number_payment * monetary_factor;
+            middle_sum_box.innerHTML = parseFloat(left_sum_box.innerHTML) - parseFloat(right_sum_box.innerHTML)
         }
 
     }
@@ -326,6 +330,13 @@
         }
     }
 
+
+    /**
+    Return a subarray elements smaller than a given pivot element.
+    @param {array}  euro_units_array    Array containing floats in an decreasing order.
+    @param {float}  sum_value           Pivot value to compare against each array element.
+    @return {array}                     Subarray from euro_units_array
+    **/
     function get_working_array(euro_units_array, sum_value) {
         // init lowest index for euro_units array
         let idx = 0;
@@ -337,14 +348,13 @@
 
         // create working_array which lists all elements smaller than
         // (including) the found one
-        working_array = []
-        for (i = idx; i < 15; i++) {
-            working_array.push(euro_units_array[i]);
-        }
+        working_array = euro_units_array.slice(idx);
+
+        return working_array;
     }
 
 
-    function calculate_random_euro_units_from_difference() {
+    function get_euro_unit_distribution_from_sum() {
         button_item = document.getElementById('button_calculation')
 
         // init all possible euro payment sizes
@@ -356,16 +366,41 @@
         out_sum_middle_item = document.getElementById('complete_sum_middle');
 
         button_item.onclick = function() {
-            const euro_sum = out_sum_middle_item.innerHTML;
-
+            // init values
+            var euro_sum = out_sum_middle_item.innerHTML;
             working_array = get_working_array(euro_units, euro_sum)
+            var result_frequency_map = {
+                500: 0,
+                200: 0,
+                100: 0,
+                50: 0,
+                20: 0,
+                10: 0,
+                5: 0,
+                2: 0,
+                1: 0,
+                0.50: 0,
+                0.20: 0,
+                0.10: 0,
+                0.05: 0,
+                0.02: 0,
+                0.01: 0
+            }
 
-            // get random int between 0 and euro_units.length
-            const random = Math.floor(Math.random() * euro_units.length)
-            console.log(random)
-            console.log(euro_units[random])
-            out_sum_middle_item.innerHTML = parseFloat(out_sum_left.innerHTML) - parseFloat(out_sum_right.innerHTML);
+            // choose random euro units from working_array unitl they sum up to euro_sum
+            while (euro_sum > 0) {
+                working_array = get_working_array(working_array, euro_sum)
 
+                // select random euro_unit from working_array
+                random_idx = Math.floor(Math.random() * working_array.length);
+                random_euro_unit = working_array[random_idx]
+
+                // increase unit item in frequency map
+                result_frequency_map[random_euro_unit] += 1
+
+                // decrease given euro_sum by random_euro_unit
+                euro_sum = Number.parseFloat(euro_sum - random_euro_unit).toFixed(2);
+            }
         }
     }
 
@@ -404,7 +439,7 @@
     calc_sum_on_units('box_left', 'input002_left', 'out002_left', 0.02);
     calc_sum_on_units('box_left', 'input001_left', 'out001_left', 0.01);
 
-    calculate_random_euro_units_from_difference()
+    get_euro_unit_distribution_from_sum()
 </script>
 
 </html>
