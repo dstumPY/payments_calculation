@@ -19,6 +19,9 @@ body {
 .product_left,
 .product_middle,
 .product_right,
+.sum_left,
+.sum_middle,
+.sum_right,
 .box_button {
     float: left;
     width: 30%;
@@ -28,7 +31,10 @@ body {
     box-sizing: border-box;
 }
 
-.quantityUnit {
+.quantityUnit,
+.quantityUnit_left,
+.quantityUnit_middle,
+.quantityUnit_right {
     float: left;
     width: 20%;
     margin-right: 3.33333%;
@@ -37,7 +43,7 @@ body {
     box-sizing: border-box;
 }
 
-.container {
+.unit_input_container {
     display: flex;
 }
 
