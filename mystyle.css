@@ -13,12 +13,15 @@ body {
     display: block;
 }
 
-.box_euro_unit_left,
-.box_euro_unit_middle,
-.box_euro_unit_right,
-.box_euro_sum_left,
-.box_euro_sum_middle,
-.box_euro_sum_right,
+.currencyUnit_left,
+.currencyUnit_middle,
+.currencyUnit_right,
+.product_left,
+.product_middle,
+.product_right,
+.sum_left,
+.sum_middle,
+.sum_right,
 .box_button {
     float: left;
     width: 30%;
@@ -28,8 +31,10 @@ body {
     box-sizing: border-box;
 }
 
-.box_unit,
-.input_unit {
+.quantityUnit,
+.quantityUnit_left,
+.quantityUnit_middle,
+.quantityUnit_right {
     float: left;
     width: 20%;
     margin-right: 3.33333%;
@@ -38,7 +43,7 @@ body {
     box-sizing: border-box;
 }
 
-.container {
+.unit_input_container {
     display: flex;
 }
 
