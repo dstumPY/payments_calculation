@@ -155,10 +155,10 @@ function randomized_summands(event) {
     middle_box = document.getElementById('box_middle');
     quantityUnit_middle = middle_box.querySelectorAll('.quantityUnit_middle');
     products_middle = middle_box.querySelectorAll('.product_middle');
-    
+
     // multiply all by -1 if complete_sum_raw was negative
     let sign = 1;
-    if (complete_sum_raw < 0){
+    if (complete_sum_raw < 0) {
         sign = -1;
     }
 
@@ -172,5 +172,40 @@ function randomized_summands(event) {
 }
 
 // clicked-button action
-let button_item = document.getElementById('button_calculation');
-button_item.addEventListener("click", function (event) { randomized_summands(event) });
+let randomized_summands_button = document.getElementById('random_sumands');
+randomized_summands_button.addEventListener("click", function (event) { randomized_summands(event) });
+
+function carry_over_randomized_sumands(event) {
+    // get all randomized product elements and all right product elements
+    products_left = document.querySelectorAll(".product_left");
+    products_middle = document.querySelectorAll(".product_middle");
+    products_right = document.querySelectorAll(".product_right");
+    
+    quantityUnit_left = document.querySelectorAll(".quantityUnit_left");
+    quantityUnit_middle = document.querySelectorAll(".quantityUnit_middle");
+    quantityUnit_right = document.querySelectorAll(".quantityUnit_right");
+
+    for (let product_idx = 0; product_idx < 15; product_idx++) {
+        // copy randomized quantityUnits
+        quantityUnit_right[product_idx].value = quantityUnit_middle[product_idx].innerHTML;
+
+        // copy randomized products
+        products_right[product_idx].innerHTML = products_middle[product_idx].innerHTML;
+
+        // reset left calculations to 0
+        products_left[product_idx].innerHTML = '0';
+        quantityUnit_left[product_idx].value = 0;
+
+    }
+
+    // reset left sum to 0
+    document.getElementById("complete_sum_left").innerHTML = "0";
+
+    // copy values from middle sum container to right sum container
+    document.getElementById("complete_sum_right").innerHTML = document.getElementById("complete_sum_middle").innerHTML;
+
+}
+
+// 
+let carry_over_button = document.getElementById("carry_over_right");
+carry_over_button.addEventListener("click", function (event) { carry_over_randomized_sumands(event) });
