@@ -11,7 +11,7 @@ const euro_units = [500, 200, 100, 50, 20, 10, 5, 2, 1, 0.5, 0.2, 0.1, 0.05, 0.0
 function calc_product_on_keyup(event) {
     let target_id = event.target.id;
 
-    // get wrapper container of target formed as 
+    // get wrapper container of target formed as
     // "container_<left|middle|right>_<quantityUnit>"
     let target_id_splitted = target_id.split('_').reverse();
     let quantityUnit = target_id_splitted[0];
@@ -50,7 +50,7 @@ function calc_product_on_keyup(event) {
     );
     complete_sum_container[0].innerHTML = sum;
 
-    // calculate difference from right and left complete_sum and write it to 
+    // calculate difference from right and left complete_sum and write it to
     // middle complete_sum
     let complete_sum_left = document.getElementById("complete_sum_left");
     let complete_sum_right = document.getElementById("complete_sum_right");
@@ -97,32 +97,56 @@ function get_working_array(euro_units_array, sum_value) {
 
 
 function randomized_summands(event) {
+
+    //TODO: assert that sum at left hand is greater than sum at right hand side
+
+
     // get bottom complete_sum_middle innerHTML
     let complete_sum_middle = document.getElementById("complete_sum_middle");
+    let right_box = document.getElementById('box_right');
+    let quantityUnit_right = right_box.querySelectorAll('.quantityUnit_right');
 
     // get complete sum
-    // - take abs in order to randomize negative sums 
+    // - take abs in order to randomize negative sums
     let complete_sum_raw = complete_sum_middle.innerHTML;
     let complete_sum_abs = Math.abs(complete_sum_middle.innerHTML);
 
 
     let working_array = get_working_array(euro_units, complete_sum_abs);
-    let result_frequency_map = {
-        500: 0,
-        200: 0,
-        100: 0,
-        50: 0,
-        20: 0,
-        10: 0,
-        5: 0,
-        2: 0,
-        1: 0,
-        0.50: 0,
-        0.20: 0,
-        0.10: 0,
-        0.05: 0,
-        0.02: 0,
-        0.01: 0
+    let result_frequency_map = {}
+    let result_keys = [
+        500,
+        200,
+        100,
+        50,
+        20,
+        10,
+        5,
+        2,
+        1,
+        0.50,
+        0.20,
+        0.10,
+        0.05,
+        0.02,
+        0.010
+    ]
+
+    // init result_frequency_map with units from right side
+    for (let idx=0; idx<result_keys.length;idx++) {
+
+        // set 0 as default value
+        if (isNaN(quantityUnit_right[idx].valueAsNumber)) {
+            result_frequency_map[result_keys[idx]] = 0;
+        } else {
+            result_frequency_map[result_keys[idx]] = quantityUnit_right[idx].valueAsNumber;
+        }
+    }
+
+    // get multiplied value of result_frequency_map
+    let multipled_result_value = 0;
+    for (const [key, value] of Object.entries(result_frequency_map)) {
+        multipled_result_value += key * value;
     }
 
     // choose random euro units from working_array unitl they sum up to euro_sum
@@ -139,15 +163,12 @@ function randomized_summands(event) {
         // decrease given euro_sum by random_euro_unit
         complete_sum_abs = Number.parseFloat(complete_sum_abs - random_unit).toFixed(2);
     }
-    console.log("bla")
 
     // separate result_frequency_map keys and values
     idx = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
     keys = [500, 200, 100, 50, 20, 10, 5, 2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01]
     values = []
     for (i in idx) {
-        console.log(i)
-        console.log(keys[i])
         values.push(keys[i]);
     }
 
@@ -180,7 +201,7 @@ function carry_over_randomized_sumands(event) {
     products_left = document.querySelectorAll(".product_left");
     products_middle = document.querySelectorAll(".product_middle");
     products_right = document.querySelectorAll(".product_right");
-    
+
     quantityUnit_left = document.querySelectorAll(".quantityUnit_left");
     quantityUnit_middle = document.querySelectorAll(".quantityUnit_middle");
     quantityUnit_right = document.querySelectorAll(".quantityUnit_right");
@@ -206,6 +227,6 @@ function carry_over_randomized_sumands(event) {
 
 }
 
-// 
+//
 let carry_over_button = document.getElementById("carry_over_right");
 carry_over_button.addEventListener("click", function (event) { carry_over_randomized_sumands(event) });
