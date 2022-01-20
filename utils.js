@@ -30,7 +30,7 @@ function calc_product_on_keyup(event) {
     let quantity = parseFloat(middle_traget.value);
 
     // get product by multiplying currencyUnit with quantity
-    right_target.innerHTML = (currencyUnit * quantity).toFixed(2);
+    right_target.innerHTML = Number.parseFloat(currencyUnit * quantity).toFixed(2);
 
     // get column container of form 'box_<left|middle|right>' in order
     // to find all child nodes of class 'product_<left|middle|right>
@@ -41,7 +41,9 @@ function calc_product_on_keyup(event) {
 
     let sum = 0;
     for (let i = 0; i < 15; i++) {
-        sum += parseFloat(product_nodes[i].innerHTML)
+        sum += parseFloat(product_nodes[i].innerHTML);
+        // +(..) casts string to number
+        sum = +(Number.parseFloat(sum).toFixed(2));
     };
 
     // write product result to bottom complete_sum div
@@ -55,7 +57,6 @@ function calc_product_on_keyup(event) {
     let complete_sum_left = document.getElementById("complete_sum_left");
     let complete_sum_right = document.getElementById("complete_sum_right");
     let complete_sum_middle = document.getElementById("complete_sum_middle");
-    //let complete_sum_left = document.getElementById("complete_checksum_middle");
 
     complete_sum_middle.innerHTML = parseFloat(complete_sum_left.innerHTML)
         - parseFloat(complete_sum_right.innerHTML);
